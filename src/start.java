@@ -43,6 +43,7 @@ public class start extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EthiQuiz.png"))); // NOI18N
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Welcome to EthiQuiz! Here are the instructions: \n- ");
