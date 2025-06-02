@@ -8,11 +8,10 @@
  * @author Windows
  */
 public class TF extends Question {
-    private String[] options;
+    private String[] options = {"True", "False"};
     
-    public TF(String questionText, String correctAnswer, String explanation, String[] options){
-        super(questionText, correctAnswer, explanation);
-        this.options = options;
+    public TF(String questionText, boolean correctAnswer, String explanation){
+        super(questionText, Boolean.toString(correctAnswer), explanation);
     }
     
     public String[] getOptions(){

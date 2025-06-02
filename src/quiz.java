@@ -3,23 +3,87 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author Windows
  */
 public class quiz extends javax.swing.JFrame {
-
+    private List<Question> questionList = new ArrayList<>();;
+    private int currentIndex = 0;
+    private int score = 0;
+    private String userName = "";
+    
     /**
      * Creates new form quiz
      */
     public quiz() {
         initComponents();
+        loadQuestions();
+        displayQuestion();
+    }
+    
+    private void loadQuestions() {
+        try {
+            Scanner scanner = new Scanner(new File("Questions.txt"));
+            while (scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                
+            }
+        } catch (IOException e) {
+            System.out.println("IOException error" + e);
+        }
+    }
+    
+    private void displayQuestion() {
+        if (currentIndex >= questionList.size()){
+            saveScore();
+            new result(userName, score).setVisible(true);
+            this.dispose();
+            return;
+        }
+        
+        Question question = questionList.get(currentIndex);
+        jTextField1.setText(question.getQuestion(());
+        jTextField2.setText(""); // clear explanation text field
+        
+        if (question instanceof MC) {
+            MC mc = (MC) question;
+            jButton1.setText(mc.getOption(0));
+            jButton2.setText(mc.getOption(1));
+            jButton3.setText(mc.getOption(2));
+            jButton4.setText(mc.getOption(3));
+            enableAllButtons(true);
+        } else if (question instanceof TF){
+            TF tf = (TF) question;
+            jButton1.setText("True");
+            jButton2.setText("False");
+            jButton3.setText("");
+            jButton4.setText("");
+            enableAllButtons(false);
+        }
+    }
+    
+    private void saveScore(){
+        try {
+            FileWriter fw = new FileWriter("scores.txt", true);;
+            PrintWriter writer = new PrintWriter (fw);
+            writer.println(userName + ": " + score);
+        } catch (IOException e) {
+            System.out.println("IOException error" + e);
+        }
+    }
+    
+    private void enableAllButtons(boolean enableAll){
+        jButton3.setEnabled(enableAll);
+        jButton4.setEnabled(enableAll);
     }
 
     /**

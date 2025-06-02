@@ -29,4 +29,8 @@ public class Question {
     public String getExplanation() {
         return explanation;
     }
+    
+    public boolean isCorrect (String userAnswer){
+        return correctAnswer.equalsIgnoreCase(userAnswer.trim());
+   }
 }
