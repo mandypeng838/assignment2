@@ -7,6 +7,10 @@
  *
  * @author 342353125
  */
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 
 public class QuestionManager {
@@ -20,24 +24,45 @@ public class QuestionManager {
     }
     
     public void loadQuestions(String filename){
-        
+        try {
+            Scanner scanner = new Scanner(new File(filename));
+            int i = 0;
+            while (scanner.hasNextLine() && i < MAX_QUESTIONS){
+                String type = scanner.nextLine();
+
+                
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not Found.");
+        }
     }
     
     public Question getQuestions(int index){
-        
+        if (index >= 0 && index < MAX_QUESTIONS) {
+            return questions[index];
+        }
+        return null;
     }
     
-    public Question submitAnswer(int index){
-        
+    public boolean submitAnswer(int index){
+        if (questions[index].getCorrectAnswer().equalsIgnoreCase(userAnswer)){
+            score++;
+            return true;
+        }
+        return false;
     }
     
     public int getScore() {
-        return score;
+       return score;
     }
     
     public void saveScore (String name, String filename){
-
+        try {
+            PrintWriter writer = new PrintWriter (new File(filename));
+            writer.println(name + ": " + score);
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not save score.");
+        }
     }
-    
-    
 }
