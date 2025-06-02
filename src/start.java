@@ -14,6 +14,7 @@ public class start extends javax.swing.JFrame {
      */
     public start() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -37,7 +38,18 @@ public class start extends javax.swing.JFrame {
 
         jLabel1.setText("Name: ");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Find Highscore");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Start Quiz");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -100,9 +112,19 @@ public class start extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String name = jTextField1.getText().trim();
+        if(name.isEmpty()){
+            jTextArea1.setText("Please Enter Name to Start Quiz!");
+            return;
+        }
+        
         new quiz().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
