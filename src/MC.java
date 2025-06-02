@@ -15,7 +15,7 @@ public class MC extends Question {
         this.options = options;
     }
     
-    public String[] getOptions() {
-        return options;
+    public String getOptions(int par) {
+        return options[par];
     }
 }

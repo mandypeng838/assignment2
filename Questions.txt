@@ -1,3 +1,18 @@
+TF
+Developers should prioritize profit over user safety in software design.
+False
+User safety should always be the primary concern in software development.
+
+TF
+It is acceptable to use unlicensed software for educational purposes.
+False
+Using unlicensed software violates intellectual property rights and can harm software developers.
+
+TF
+Software developers have an ethical responsibility to consider accessibility in their applications.
+True
+Accessibility ensures equal access to technology for all users.
+
 ﻿MC
 What is the primary ethical concern with collecting user data without consent?
 Privacy violation
@@ -7,53 +22,11 @@ Privacy violation
 Faster service
 Better analytics
 
-TF
-Software developers have an ethical responsibility to consider accessibility in their applications.
-True
-Accessibility ensures equal access to technology for all users, which is an ethical imperative.
-
 MC
-What is the main ethical issue with using AI in decision-making processes?
-Bias in algorithms
-AI systems can perpetuate existing biases and discrimination if not carefully designed and monitored.
-Speed of processing
-Cost effectiveness
-Technical complexity
-Maintenance needs
-
-TF
-It is acceptable to use unlicensed software for educational purposes.
-False
-Using unlicensed software violates intellectual property rights and can harm software developers.
-
-MC
-What is the ethical approach to handling a security vulnerability discovery?
-Responsible disclosure
-Inform the company privately and give them time to fix it before public disclosure.
-Ignore it
-Public immediate disclosure
-Sell the information
-Keep it secret
-
-MC
-Which practice best protects user privacy in software development?
-Data minimization
-Only collect essential data and delete it when no longer needed.
-Maximum data collection
-Unlimited storage
-No encryption
-Shared access
-
-TF
-Developers should prioritize profit over user safety in software design.
-False
-User safety should always be the primary concern in software development.
-
-MC
-What is the ethical way to handle user passwords?
-Secure hashing
-Passwords should be hashed and salted to protect user security.
-Plain text storage
-Simple encryption
-Shared storage
-No protection
+What act protects user's personal data with artificial intelligence in Canada?
+Artificial Intelligence and Data Act (AIDA)
+The AIDA introduced new rules for developing and deploying AI in Canada
+DMCA
+AIDA
+CAN-SPAM
+FOIA

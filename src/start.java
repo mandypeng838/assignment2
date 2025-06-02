@@ -1,3 +1,8 @@
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -62,7 +67,7 @@ public class start extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Welcome to EthiQuiz! Here are the instructions: \n- Quiz consists of 8 questions (score out of 8).\n- Click submit after selecting the answer.\n- At the end your score will be returned and\n   explanations of correct answers are shown.\n- Have fun!");
+        jTextArea1.setText("Welcome to EthiQuiz! Here are the instructions: \n- Quiz consists of 8 questions (score out of 8).\n- After you click one of the options, an explanation\n   is shown.\n- Click on the continue button to move onto the next\n   question.\n- Have fun!");
         jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -96,8 +101,8 @@ public class start extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -125,6 +130,17 @@ public class start extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            Scanner scanner = new Scanner(new File("scores.txt"));
+            // edit here
+            scanner.close();
+            jTextArea1.setText("High Score: "); // edit this 
+        } catch (FileNotFoundException e) {
+            jTextArea1.setText("No scores found.");
+        }
+    }
 
     /**
      * @param args the command line arguments

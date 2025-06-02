@@ -29,14 +29,14 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="69" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="score" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="restart" min="-2" pref="139" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -51,12 +51,12 @@
               <Component id="jLabel2" min="-2" pref="154" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                  <Component id="score" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="restart" min="-2" pref="35" max="-2" attributes="0"/>
-              <EmptySpace pref="71" max="32767" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,13 +67,19 @@
         <Property name="text" type="java.lang.String" value="Your Score:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="score">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scoreActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="restart">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="66" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Try Again!"/>
       </Properties>
       <Events>

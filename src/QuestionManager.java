@@ -17,39 +17,10 @@ public class QuestionManager {
     private int score = 0;
     private Question[] questions;
     public static final int MAX_QUESTIONS = 8;
+    private String userAnswer;
     
     public QuestionManager () {
         questions = new Question[MAX_QUESTIONS];
-    }
-    
-    public void loadQuestions(String filename){
-        try {
-            Scanner scanner = new Scanner(new File(filename));
-            int i = 0;
-            while (scanner.hasNextLine() && i < MAX_QUESTIONS){
-                String type = scanner.nextLine().trim();
-                String questionText = scanner.nextLine().trim();
-                if (type.equals("TF")) {
-                    String answerLine = scanner.nextLine().trim();
-                    boolean answer = Boolean.parseBoolean(answerLine);
-                    String explanation = scanner.nextLine().trim();
-                    questions[i] = new TF(questionText, answer, explanation);
-                    i++;
-                } else if (type.equals("MC")) {
-                    String[] choices = new String[4];
-                    for (int j = 0; j < 4; j++) {
-                        choices[j] = scanner.nextLine();
-                    }
-                    String answer = scanner.nextLine().trim();
-                    String explanation = scanner.nextLine().trim();
-                    questions[i] = new MC(questionText, answer, explanation, choices);
-                    i++;
-                }
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not Found.");
-        }
     }
     
     public Question getQuestions(int index){

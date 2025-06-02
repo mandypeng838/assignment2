@@ -4,6 +4,7 @@
  */
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,11 +17,11 @@ import java.util.Scanner;
  * @author Windows
  */
 public class quiz extends javax.swing.JFrame {
-    private List<Question> questionList = new ArrayList<>();;
+    private List<Question> questionList = new ArrayList<>();
     private int currentIndex = 0;
     private int score = 0;
-    private String userName = "";
-    
+    private static final int MAX_QUESTIONS = 8;
+
     /**
      * Creates new form quiz
      */
@@ -30,60 +31,81 @@ public class quiz extends javax.swing.JFrame {
         displayQuestion();
     }
     
-    private void loadQuestions() {
+    public void loadQuestions(){
         try {
             Scanner scanner = new Scanner(new File("Questions.txt"));
-            while (scanner.hasNextLine()){
-                String line = scanner.nextLine();
-                
+            int i = 0;
+            while (scanner.hasNextLine() && i < 8){
+                String type = scanner.nextLine().trim();
+                String questionText = scanner.nextLine().trim();
+                if (type.equals("TF")) {
+                    String answerLine = scanner.nextLine().trim();
+                    boolean answer = Boolean.parseBoolean(answerLine);
+                    String explanation = scanner.nextLine().trim();
+                    TF[] questions = null;
+                    questions[i] = new TF(questionText, answer, explanation);
+                    i++;
+                } else if (type.equals("MC")) {
+                    String[] choices = new String[4];
+                    for (int j = 0; j < 4; j++) {
+                        choices[j] = scanner.nextLine();
+                    }
+                    String answer = scanner.nextLine().trim();
+                    String explanation = scanner.nextLine().trim();
+                    MC[] questions = null;
+                    questions[i] = new MC(questionText, answer, explanation, choices);
+                    i++;
+                }
             }
-        } catch (IOException e) {
-            System.out.println("IOException error" + e);
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not Found.");
         }
     }
     
     private void displayQuestion() {
         if (currentIndex >= questionList.size()){
             saveScore();
-            new result(userName, score).setVisible(true);
-            this.dispose();
+            new result().setVisible(true);
+            this.setVisible(false);
             return;
         }
         
         Question question = questionList.get(currentIndex);
-        jTextField1.setText(question.getQuestion(());
+        jTextField1.setText(question.getQuestionText());
         jTextField2.setText(""); // clear explanation text field
         
         if (question instanceof MC) {
             MC mc = (MC) question;
-            jButton1.setText(mc.getOption(0));
-            jButton2.setText(mc.getOption(1));
-            jButton3.setText(mc.getOption(2));
-            jButton4.setText(mc.getOption(3));
+            option1.setText(mc.getOptions(0));
+            option2.setText(mc.getOptions(1));
+            option3.setText(mc.getOptions(2));
+            option4.setText(mc.getOptions(3));
             enableAllButtons(true);
         } else if (question instanceof TF){
             TF tf = (TF) question;
-            jButton1.setText("True");
-            jButton2.setText("False");
-            jButton3.setText("");
-            jButton4.setText("");
+            option1.setText("True");
+            option2.setText("False");
+            option3.setText("");
+            option4.setText("");
             enableAllButtons(false);
         }
     }
     
-    private void saveScore(){
+    private void saveScore() {
         try {
-            FileWriter fw = new FileWriter("scores.txt", true);;
-            PrintWriter writer = new PrintWriter (fw);
-            writer.println(userName + ": " + score);
+            FileWriter fw = new FileWriter("scores.txt", true);
+            PrintWriter writer = new PrintWriter(fw);
+            writer.println(score + "/" + MAX_QUESTIONS);
+            writer.close();
         } catch (IOException e) {
-            System.out.println("IOException error" + e);
+            System.out.println("IOException error: " + e.getMessage());
         }
     }
     
     private void enableAllButtons(boolean enableAll){
-        jButton3.setEnabled(enableAll);
-        jButton4.setEnabled(enableAll);
+        option3.setEnabled(enableAll);
+        option4.setEnabled(enableAll);
     }
 
     /**
@@ -97,10 +119,10 @@ public class quiz extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        option1 = new javax.swing.JButton();
+        option2 = new javax.swing.JButton();
+        option3 = new javax.swing.JButton();
+        option4 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
 
@@ -108,19 +130,40 @@ public class quiz extends javax.swing.JFrame {
 
         jLabel1.setText("Question: ");
 
+        jTextField1.setEditable(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("jButton1");
+        option1.setText("option1");
+        option1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                option1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        option2.setText("option2");
+        option2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                option2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        option3.setText("option3");
+        option3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                option3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("jButton4");
+        option4.setText("option4");
+        option4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                option4ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setText("Explanation");
 
@@ -133,20 +176,21 @@ public class quiz extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(option4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton5)
+                            .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextField1)))
+                    .addComponent(option3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(option2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(option1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,13 +200,13 @@ public class quiz extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(option1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(option2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(option3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
+                .addComponent(option4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,6 +221,22 @@ public class quiz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_option1ActionPerformed
+
+    private void option2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_option2ActionPerformed
+
+    private void option3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_option3ActionPerformed
+
+    private void option4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_option4ActionPerformed
+  
     /**
      * @param args the command line arguments
      */
@@ -213,13 +273,14 @@ public class quiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton option1;
+    private javax.swing.JButton option2;
+    private javax.swing.JButton option3;
+    private javax.swing.JButton option4;
     // End of variables declaration//GEN-END:variables
 }
+
