@@ -3,11 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-// Add all imports
+// imports
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
@@ -34,11 +34,6 @@ public class quiz extends javax.swing.JFrame {
         loadQuestions();
         displayQuestion();
     }
-    
-    /**
-     * 
-     * 
-     */
     
     public void loadQuestions(){
         try {
@@ -79,7 +74,7 @@ public class quiz extends javax.swing.JFrame {
         }
         
         Question question = questionList.get(currentIndex);
-        jTextField1.setText(question.getQuestionText());
+        questionPane.setText(question.getQuestionText());
         jTextField2.setText(""); // clear explanation text field
         
         if (question instanceof MC) {
@@ -105,14 +100,22 @@ public class quiz extends javax.swing.JFrame {
         if (answered) return;
         
         Question question = questionList.get(currentIndex);
-        boolean isCorrect = false;
+        answered = true;
         
-        if (question instanceof MC) {
-            MC mc = (MC) question;
-            
-            
+        if (question.isCorrect(userAnswer)){
+            score++;
+            jTextField2.setText("Correct! ");
+            explanation.setText(question.getExplanation());
+        } else {
+            jTextField2.setText("Incorrect! ");
+            explanation.setText(question.getExplanation());
         }
         
+        // Disable all buttons after the user answers
+        option1.setEnabled(false);
+        option2.setEnabled(false);
+        option3.setEnabled(false);
+        option4.setEnabled(false);
     }
     
     private void saveScore() {
@@ -141,24 +144,21 @@ public class quiz extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         option1 = new javax.swing.JButton();
         option2 = new javax.swing.JButton();
         option3 = new javax.swing.JButton();
         option4 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        next = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        explanation = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        questionPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Question: ");
-
-        jTextField1.setEditable(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         option1.setText("option1");
         option1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,9 +188,24 @@ public class quiz extends javax.swing.JFrame {
             }
         });
 
+        jTextField2.setEditable(false);
+        jTextField2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jTextField2.setText("Explanation");
 
-        jButton5.setText("Continue");
+        next.setBackground(new java.awt.Color(102, 255, 0));
+        next.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        next.setText("Continue");
+        next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextActionPerformed(evt);
+            }
+        });
+
+        explanation.setEditable(false);
+        jScrollPane2.setViewportView(explanation);
+
+        questionPane.setEditable(false);
+        jScrollPane1.setViewportView(questionPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,25 +216,26 @@ public class quiz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(option4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addComponent(option3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(option2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(option1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(option1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(option1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -229,38 +245,38 @@ public class quiz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(option4)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option1ActionPerformed
-        // TODO add your handling code here:
         handleAnswer(option1.getText());
     }//GEN-LAST:event_option1ActionPerformed
 
     private void option2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option2ActionPerformed
-        // TODO add your handling code here:
         handleAnswer(option2.getText());
     }//GEN-LAST:event_option2ActionPerformed
 
     private void option3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option3ActionPerformed
-        // TODO add your handling code here:
         handleAnswer(option3.getText());
     }//GEN-LAST:event_option3ActionPerformed
 
     private void option4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option4ActionPerformed
-        // TODO add your handling code here:
         handleAnswer(option4.getText());
     }//GEN-LAST:event_option4ActionPerformed
+
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+        answered = false;
+        currentIndex++;
+        displayQuestion();
+    }//GEN-LAST:event_nextActionPerformed
   
     /**
      * @param args the command line arguments
@@ -298,14 +314,17 @@ public class quiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTextPane explanation;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton next;
     private javax.swing.JButton option1;
     private javax.swing.JButton option2;
     private javax.swing.JButton option3;
     private javax.swing.JButton option4;
+    private javax.swing.JTextPane questionPane;
     // End of variables declaration//GEN-END:variables
 }
 
