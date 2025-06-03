@@ -19,6 +19,7 @@ public class start extends javax.swing.JFrame {
      */
     public start() {
         initComponents();
+        // changes the location of the popup to the middle of the screen
         setLocationRelativeTo(null);
     }
 
@@ -117,12 +118,14 @@ public class start extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        // retrieves the user's name
         String name = jTextField1.getText().trim();
         if(name.isEmpty()){
             jTextArea1.setText("Please Enter Name to Start Quiz!");
             return;
         }
         
+        // set the quiz JFrame visible
         new quiz().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed

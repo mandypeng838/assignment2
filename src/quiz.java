@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+// Add all imports
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -20,6 +21,8 @@ public class quiz extends javax.swing.JFrame {
     private List<Question> questionList = new ArrayList<>();
     private int currentIndex = 0;
     private int score = 0;
+    private String correctAnswer = "";
+    private boolean answered = false;
     private static final int MAX_QUESTIONS = 8;
 
     /**
@@ -31,20 +34,24 @@ public class quiz extends javax.swing.JFrame {
         displayQuestion();
     }
     
+    /**
+     * 
+     * 
+     */
+    
     public void loadQuestions(){
         try {
             Scanner scanner = new Scanner(new File("Questions.txt"));
             int i = 0;
-            while (scanner.hasNextLine() && i < 8){
+            while (scanner.hasNextLine() && i < MAX_QUESTIONS){
                 String type = scanner.nextLine().trim();
                 String questionText = scanner.nextLine().trim();
+                
                 if (type.equals("TF")) {
                     String answerLine = scanner.nextLine().trim();
                     boolean answer = Boolean.parseBoolean(answerLine);
                     String explanation = scanner.nextLine().trim();
-                    TF[] questions = null;
-                    questions[i] = new TF(questionText, answer, explanation);
-                    i++;
+                    questionList.add(new TF(questionText, answer, explanation));
                 } else if (type.equals("MC")) {
                     String[] choices = new String[4];
                     for (int j = 0; j < 4; j++) {
@@ -52,10 +59,9 @@ public class quiz extends javax.swing.JFrame {
                     }
                     String answer = scanner.nextLine().trim();
                     String explanation = scanner.nextLine().trim();
-                    MC[] questions = null;
-                    questions[i] = new MC(questionText, answer, explanation, choices);
-                    i++;
+                    questionList.add(new MC(questionText, answer, explanation, choices));
                 }
+                i++;
             }
             scanner.close();
         } catch (FileNotFoundException e) {
@@ -90,6 +96,20 @@ public class quiz extends javax.swing.JFrame {
             option4.setText("");
             enableAllButtons(false);
         }
+    }
+    
+    private void handleAnswer(String userAnswer){
+        if (answered) return;
+        
+        Question question = questionList.get(currentIndex);
+        boolean isCorrect = false;
+        
+        if (question instanceof MC) {
+            MC mc = (MC) question;
+            //correctAnswer = mc.(); edit here
+            
+        }
+        
     }
     
     private void saveScore() {
@@ -223,6 +243,7 @@ public class quiz extends javax.swing.JFrame {
 
     private void option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_option1ActionPerformed
 
     private void option2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option2ActionPerformed
