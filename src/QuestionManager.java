@@ -10,7 +10,6 @@
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 
 public class QuestionManager {

@@ -30,6 +30,7 @@ public class quiz extends javax.swing.JFrame {
      */
     public quiz() {
         initComponents();
+        // call methods to display the questions
         loadQuestions();
         displayQuestion();
     }
@@ -83,6 +84,7 @@ public class quiz extends javax.swing.JFrame {
         
         if (question instanceof MC) {
             MC mc = (MC) question;
+            // set the button text to the question options
             option1.setText(mc.getOptions(0));
             option2.setText(mc.getOptions(1));
             option3.setText(mc.getOptions(2));
@@ -90,6 +92,7 @@ public class quiz extends javax.swing.JFrame {
             enableAllButtons(true);
         } else if (question instanceof TF){
             TF tf = (TF) question;
+            // set the button text to true and false
             option1.setText("True");
             option2.setText("False");
             option3.setText("");
@@ -106,7 +109,7 @@ public class quiz extends javax.swing.JFrame {
         
         if (question instanceof MC) {
             MC mc = (MC) question;
-            //correctAnswer = mc.(); edit here
+            
             
         }
         
@@ -197,16 +200,14 @@ public class quiz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(option4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton5)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
                     .addComponent(option3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(option2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(option1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -243,19 +244,22 @@ public class quiz extends javax.swing.JFrame {
 
     private void option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option1ActionPerformed
         // TODO add your handling code here:
-        
+        handleAnswer(option1.getText());
     }//GEN-LAST:event_option1ActionPerformed
 
     private void option2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option2ActionPerformed
         // TODO add your handling code here:
+        handleAnswer(option2.getText());
     }//GEN-LAST:event_option2ActionPerformed
 
     private void option3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option3ActionPerformed
         // TODO add your handling code here:
+        handleAnswer(option3.getText());
     }//GEN-LAST:event_option3ActionPerformed
 
     private void option4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option4ActionPerformed
         // TODO add your handling code here:
+        handleAnswer(option4.getText());
     }//GEN-LAST:event_option4ActionPerformed
   
     /**
