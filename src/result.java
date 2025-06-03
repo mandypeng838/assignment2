@@ -15,6 +15,9 @@ public class result extends javax.swing.JFrame {
     public result() {
         initComponents();
         setLocationRelativeTo(null);
+        String StrScore;
+        StrScore = String.valueOf(quiz.score);
+        score.setText(StrScore + "/8");
     }
 
     /**

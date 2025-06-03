@@ -35,7 +35,7 @@ public class start extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
-        highscore = new javax.swing.JButton();
+        scores = new javax.swing.JButton();
         start = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -51,10 +51,10 @@ public class start extends javax.swing.JFrame {
             }
         });
 
-        highscore.setText("Find Highscore");
-        highscore.addActionListener(new java.awt.event.ActionListener() {
+        scores.setText("Find Scores");
+        scores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                highscoreActionPerformed(evt);
+                scoresActionPerformed(evt);
             }
         });
 
@@ -85,7 +85,7 @@ public class start extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -95,7 +95,7 @@ public class start extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(highscore)))))
+                                .addComponent(scores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,7 +109,7 @@ public class start extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(highscore))
+                    .addComponent(scores))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(start)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -138,12 +138,17 @@ public class start extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
 
-    private void highscoreActionPerformed(java.awt.event.ActionEvent evt) {
+    private void scoresActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             Scanner scanner = new Scanner(new File("scores.txt"));
-            // edit here
+            String scoresText = "";
+            
+            while (scanner.hasNextLine()){
+                scoresText += scanner.nextLine() + "\n" ;
+            }
+            
             scanner.close();
-            jTextArea1.setText("High Score: "); // edit this 
+            jTextArea1.setText("Scores: " + "\n" + scoresText); // edit this 
         } catch (FileNotFoundException e) {
             jTextArea1.setText("No scores found.");
         }
@@ -185,12 +190,12 @@ public class start extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton highscore;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField nameField;
+    private javax.swing.JButton scores;
     private javax.swing.JButton start;
     // End of variables declaration//GEN-END:variables
 }

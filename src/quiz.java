@@ -18,9 +18,10 @@ import java.util.Scanner;
  * @author Windows
  */
 public class quiz extends javax.swing.JFrame {
+    // create an array list to hold the questions
     private List<Question> questionList = new ArrayList<>();
     private int currentIndex = 0;
-    private int score = 0;
+    public static int score = 0;
     private String correctAnswer = "";
     private boolean answered = false;
     private static final int MAX_QUESTIONS = 8;
@@ -84,7 +85,11 @@ public class quiz extends javax.swing.JFrame {
             option2.setText(mc.getOptions(1));
             option3.setText(mc.getOptions(2));
             option4.setText(mc.getOptions(3));
-            enableAllButtons(true);
+            // enable all buttons
+            option1.setEnabled(true);
+            option2.setEnabled(true);
+            option3.setEnabled(true);
+            option4.setEnabled(true);
         } else if (question instanceof TF){
             TF tf = (TF) question;
             // set the button text to true and false
@@ -92,7 +97,11 @@ public class quiz extends javax.swing.JFrame {
             option2.setText("False");
             option3.setText("");
             option4.setText("");
-            enableAllButtons(false);
+            // only enable the first button, true and false
+            option1.setEnabled(true);
+            option2.setEnabled(true);
+            option3.setEnabled(false);
+            option4.setEnabled(false);
         }
     }
     
@@ -122,18 +131,13 @@ public class quiz extends javax.swing.JFrame {
         try {
             FileWriter fw = new FileWriter("scores.txt", true);
             PrintWriter writer = new PrintWriter(fw);
-            writer.println(score + "/" + MAX_QUESTIONS);
+            writer.println("Name: " + start.gName + " Score: " + score + "/" + MAX_QUESTIONS);
             writer.close();
         } catch (IOException e) {
             System.out.println("IOException error: " + e.getMessage());
         }
     }
     
-    private void enableAllButtons(boolean enableAll){
-        option3.setEnabled(enableAll);
-        option4.setEnabled(enableAll);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -273,8 +277,8 @@ public class quiz extends javax.swing.JFrame {
     }//GEN-LAST:event_option4ActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        answered = false;
         currentIndex++;
+        answered = false;
         displayQuestion();
     }//GEN-LAST:event_nextActionPerformed
   

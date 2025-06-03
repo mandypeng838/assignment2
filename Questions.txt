@@ -2,31 +2,51 @@ TF
 Developers should prioritize profit over user safety in software design.
 False
 User safety should always be the primary concern in software development.
-
 TF
 It is acceptable to use unlicensed software for educational purposes.
 False
 Using unlicensed software violates intellectual property rights and can harm software developers.
-
 TF
 Software developers have an ethical responsibility to consider accessibility in their applications.
 True
 Accessibility ensures equal access to technology for all users.
-
-﻿MC
+MC
 What is the primary ethical concern with collecting user data without consent?
-Privacy violation
-Privacy is a fundamental right. Collecting data without consent violates user autonomy and trust.
 Improved user experience
 Privacy violation
 Faster service
 Better analytics
-
+Privacy violation
+Privacy is a fundamental right. Collecting data without consent violates user autonomy and trust.
 MC
 What act protects user's personal data with artificial intelligence in Canada?
-Artificial Intelligence and Data Act (AIDA)
-The AIDA introduced new rules for developing and deploying AI in Canada
 DMCA
 AIDA
 CAN-SPAM
 FOIA
+AIDA
+The AIDA introduced new rules for developing and deploying AI in Canada.
+MC
+Which of the following is an example of ethical computer use?
+Installing pirated software
+Respecting others' privacy online
+Spreading fake news
+Sharing someone else’s password
+Respecting others' privacy online
+Using technology responsibly includes protecting privacy and following rules.
+MC
+Which password is the most ethical to use?
+123456
+Your pet’s name
+A strong, unique password not shared with others
+Same password for all accounts
+A strong, unique password not shared with others
+Strong passwords protect user data and privacy.
+MC
+What is the ethical action if you find a security flaw in a website?
+Ignore it
+Exploit it for personal gain
+Report it to the website owner
+Tell your friends to try it
+Report it to the website owner
+Reporting flaws helps improve security and shows responsible behavior.
