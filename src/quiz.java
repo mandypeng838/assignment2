@@ -34,6 +34,7 @@ public class quiz extends javax.swing.JFrame {
         // call methods to display the questions
         loadQuestions();
         displayQuestion();
+        next.setEnabled(false);
     }
     
     public void loadQuestions(){
@@ -76,8 +77,12 @@ public class quiz extends javax.swing.JFrame {
         
         Question question = questionList.get(currentIndex);
         questionPane.setText(question.getQuestionText());
-        jTextField2.setText(""); // clear explanation text field
-        
+        // clear explanation text fiels
+        jTextField2.setText("");
+        explanation.setText("");
+        // set the continue button to false until the user answers
+        next.setEnabled(false);
+
         if (question instanceof MC) {
             MC mc = (MC) question;
             // set the button text to the question options
@@ -262,18 +267,22 @@ public class quiz extends javax.swing.JFrame {
 
     private void option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option1ActionPerformed
         handleAnswer(option1.getText());
+        next.setEnabled(true);
     }//GEN-LAST:event_option1ActionPerformed
 
     private void option2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option2ActionPerformed
         handleAnswer(option2.getText());
+        next.setEnabled(true);
     }//GEN-LAST:event_option2ActionPerformed
 
     private void option3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option3ActionPerformed
         handleAnswer(option3.getText());
+        next.setEnabled(true);
     }//GEN-LAST:event_option3ActionPerformed
 
     private void option4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option4ActionPerformed
         handleAnswer(option4.getText());
+        next.setEnabled(true);
     }//GEN-LAST:event_option4ActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
