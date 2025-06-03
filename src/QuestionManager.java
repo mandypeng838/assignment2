@@ -3,15 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/**
- *
- * @author 342353125
- */
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
-
+/**
+ *
+ * @author 342353125
+ */
 public class QuestionManager {
     private int score = 0;
     private Question[] questions;
