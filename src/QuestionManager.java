@@ -15,9 +15,8 @@ public class QuestionManager {
     private int score = 0;
     private Question[] questions;
     public static final int MAX_QUESTIONS = 8;
-    private String userAnswer;
     
-    public QuestionManager () {
+    public QuestionManager (Question[] questions) {
         questions = new Question[MAX_QUESTIONS];
     }
     
@@ -28,25 +27,7 @@ public class QuestionManager {
         return null;
     }
     
-    public boolean submitAnswer(int index){
-        if (questions[index].isCorrect(userAnswer)){
-            score++;
-            return true;
-        }
-        return false;
-    }
-    
     public int getScore() {
        return score;
-    }
-    
-    public void saveScore (String name, String filename){
-        try {
-            PrintWriter writer = new PrintWriter (new File(filename));
-            writer.println(name + ": " + score + "/" + MAX_QUESTIONS);
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Couldn't find the file to hold scores.");
-        }
     }
 }

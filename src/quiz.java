@@ -36,7 +36,7 @@ public class quiz extends javax.swing.JFrame {
         displayQuestion();
         next.setEnabled(false);
     }
-    
+   
     public void loadQuestions(){
         try {
             Scanner scanner = new Scanner(new File("Questions.txt"));
@@ -139,9 +139,10 @@ public class quiz extends javax.swing.JFrame {
             writer.println("Name: " + start.gName + " Score: " + score + "/" + MAX_QUESTIONS);
             writer.close();
         } catch (IOException e) {
-            System.out.println("IOException error: " + e.getMessage());
+            System.out.println("IOException error: " + e);
         }
     }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
