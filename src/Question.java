@@ -33,6 +33,10 @@ public class Question {
     public boolean isCorrect (String userAnswer){
         return correctAnswer.equalsIgnoreCase(userAnswer.trim());
    }
+    
+    public static String formatScore(int score, int total){
+        return " Score: " + score + "/" + total;
+    }
 
 
 }

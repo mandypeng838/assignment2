@@ -17,4 +17,9 @@ public class TF extends Question {
     public String[] getOptions(){
         return options;
     }
+    
+    @Override
+    public String getQuestionText(){
+        return "True/False: " + super.getQuestionText();
+    }
 }

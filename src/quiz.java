@@ -22,7 +22,6 @@ public class quiz extends javax.swing.JFrame {
     private List<Question> questionList = new ArrayList<>();
     private int currentIndex = 0;
     public static int score = 0;
-    private String correctAnswer = "";
     private boolean answered = false;
     private static final int MAX_QUESTIONS = 8;
 
@@ -36,7 +35,10 @@ public class quiz extends javax.swing.JFrame {
         displayQuestion();
         next.setEnabled(false);
     }
-   
+    
+    /**
+     * Method reads the Questions.txt file and adds it to the array list
+     */
     public void loadQuestions(){
         try {
             Scanner scanner = new Scanner(new File("Questions.txt"));
@@ -96,7 +98,6 @@ public class quiz extends javax.swing.JFrame {
             option3.setEnabled(true);
             option4.setEnabled(true);
         } else if (question instanceof TF){
-            TF tf = (TF) question;
             // set the button text to true and false
             option1.setText("True");
             option2.setText("False");
@@ -136,7 +137,7 @@ public class quiz extends javax.swing.JFrame {
         try {
             FileWriter fw = new FileWriter("scores.txt", true);
             PrintWriter writer = new PrintWriter(fw);
-            writer.println("Name: " + start.gName + " Score: " + score + "/" + MAX_QUESTIONS);
+            writer.println("Name: " + start.gName + Question.formatScore(score, MAX_QUESTIONS));
             writer.close();
         } catch (IOException e) {
             System.out.println("IOException error: " + e);
