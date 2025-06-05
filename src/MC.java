@@ -22,6 +22,12 @@ public class MC extends Question {
         this.options = options;
     }
     
+    /**
+     * This is an overloaded constructor that is used for a test question
+     * @param questionText
+     * @param correctAnswer
+     * @param explanation
+     */
     public MC (String questionText, String correctAnswer, String explanation){
         super(questionText, correctAnswer, explanation);
         this.options = new String[] {"option1", "option2", "option3", "option4"};
