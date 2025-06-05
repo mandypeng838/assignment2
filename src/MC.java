@@ -22,6 +22,11 @@ public class MC extends Question {
         this.options = options;
     }
     
+    public MC (String questionText, String correctAnswer, String explanation){
+        super(questionText, correctAnswer, explanation);
+        this.options = new String[] {"option1", "option2", "option3", "option4"};
+    }
+    
     /**
      * Returns the option of the number (1-4) for the multiple choice question
      * @param num

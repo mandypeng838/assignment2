@@ -30,6 +30,9 @@ public class quiz extends javax.swing.JFrame {
      */
     public quiz() {
         initComponents();
+        // create a test question
+        MC testQuestion = new MC("What colour is a primary colour", 
+                "blue", "blue is one of the primary colours");
         // call methods to display the questions
         loadQuestions();
         displayQuestion();
