@@ -30,12 +30,11 @@ public class quiz extends javax.swing.JFrame {
      */
     public quiz() {
         initComponents();
-        // create a test question
-        MC testQuestion = new MC("What colour is a primary colour", 
-                "blue", "blue is one of the primary colours");
+        setLocationRelativeTo(null);
         // call methods to display the questions
         loadQuestions();
         displayQuestion();
+        // disables the continue button
         next.setEnabled(false);
     }
     
@@ -44,16 +43,22 @@ public class quiz extends javax.swing.JFrame {
      */
     public void loadQuestions(){
         try {
+            // create a scanner to read from file
             Scanner scanner = new Scanner(new File("Questions.txt"));
+            // initialize counter variable
             int i = 0;
+            // while we are still under 8 questions, and the scanner has another line to read
             while (scanner.hasNextLine() && i < MAX_QUESTIONS){
+                // the first line is always the type of the question
                 String type = scanner.nextLine().trim();
+                // stores the next line, which is the question itself
                 String questionText = scanner.nextLine().trim();
-                
+                // if the type of question is true/false or Multiple choice
                 if (type.equals("TF")) {
                     String answerLine = scanner.nextLine().trim();
                     boolean answer = Boolean.parseBoolean(answerLine);
                     String explanation = scanner.nextLine().trim();
+                    // add the question to the array list
                     questionList.add(new TF(questionText, answer, explanation));
                 } else if (type.equals("MC")) {
                     String[] choices = new String[4];
@@ -62,16 +67,23 @@ public class quiz extends javax.swing.JFrame {
                     }
                     String answer = scanner.nextLine().trim();
                     String explanation = scanner.nextLine().trim();
+                    // add the question to the array list
                     questionList.add(new MC(questionText, answer, explanation, choices));
                 }
+                // increase counter
                 i++;
             }
-            scanner.close();
+            scanner.close(); // close scanner
         } catch (FileNotFoundException e) {
             System.out.println("File not Found.");
         }
     }
     
+    
+    /**
+     * This method sets all the buttons based on the type of question 
+     * and displays the question text
+     */
     private void displayQuestion() {
         if (currentIndex >= questionList.size()){
             saveScore();
@@ -114,6 +126,11 @@ public class quiz extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * This method takes the user's answer and returns whether it is correct or not
+     * It then sets the text of the JPane to the explanation
+     * @param userAnswer 
+     */
     private void handleAnswer(String userAnswer){
         if (answered) return;
         
@@ -136,6 +153,9 @@ public class quiz extends javax.swing.JFrame {
         option4.setEnabled(false);
     }
     
+    /**
+     * This method writes the user's name and score to scores.txt 
+     */
     private void saveScore() {
         try {
             FileWriter fw = new FileWriter("scores.txt", true);

@@ -142,13 +142,14 @@ public class start extends javax.swing.JFrame {
         try {
             Scanner scanner = new Scanner(new File("scores.txt"));
             String scoresText = "";
-            
+            // while loop to read and store the entire scores.txt
             while (scanner.hasNextLine()){
                 scoresText += scanner.nextLine() + "\n" ;
             }
             
-            scanner.close();
-            jTextArea1.setText("Scores: " + "\n" + scoresText); // edit this 
+            scanner.close(); // close scanner
+            // set the text area to the scores we retrieved
+            jTextArea1.setText("Scores: " + "\n" + scoresText);
         } catch (FileNotFoundException e) {
             jTextArea1.setText("No scores found.");
         }

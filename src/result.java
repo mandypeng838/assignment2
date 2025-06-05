@@ -14,9 +14,12 @@ public class result extends javax.swing.JFrame {
      */
     public result() {
         initComponents();
+        // changes location to middle of screen
         setLocationRelativeTo(null);
+        // convert the score into a string
         String StrScore;
         StrScore = String.valueOf(quiz.score);
+        // output the score in the text field
         score.setText(StrScore + "/8");
     }
 
