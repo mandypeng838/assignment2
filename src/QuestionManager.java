@@ -8,7 +8,6 @@
  * @author 342353125
  */
 public class QuestionManager {
-    private int score = 0;
     private Question[] questions;
     public static final int MAX_QUESTIONS = 8;
     
@@ -21,9 +20,5 @@ public class QuestionManager {
             return questions[index];
         }
         return null;
-    }
-    
-    public int getScore() {
-       return score;
     }
 }
