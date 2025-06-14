@@ -74,6 +74,21 @@ public class quiz extends javax.swing.JFrame {
                 i++;
             }
             scanner.close(); // close scanner
+ 
+            // Create a test question using the overloaded constructor
+            MC testQuestion = new MC(
+                "What is the purpose of an overloaded constructor?",
+                "To allow multiple ways to create an object",
+                "Overloaded constructors give flexibility in how objects are created."
+            );
+
+            // Print to console to explain to the user
+            System.out.println("Here is a sample test question (not part of the actual quiz):");
+            System.out.println(testQuestion.getQuestionText());
+            System.out.println("Correct Answer: " + testQuestion.getCorrectAnswer());
+            System.out.println("Explanation: " + testQuestion.getExplanation());
+            System.out.println("This test question follows the same format used in the quiz.");
+            
         } catch (FileNotFoundException e) {
             System.out.println("File not Found.");
         }

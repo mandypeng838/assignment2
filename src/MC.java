@@ -30,7 +30,6 @@ public class MC extends Question {
      */
     public MC (String questionText, String correctAnswer, String explanation){
         super(questionText, correctAnswer, explanation);
-        this.options = new String[] {"option1", "option2", "option3", "option4"};
     }
     
     /**
